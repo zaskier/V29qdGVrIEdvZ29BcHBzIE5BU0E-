@@ -1,8 +1,8 @@
 {
-  "name": "d",
+  "name": "url-collector",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "microservice that prepares a list of urls for the first microservice media-downloader based on https://api.nasa.gov/planetary/apod",
+  "author": "Wojciech Iskierka",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
