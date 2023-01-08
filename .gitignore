@@ -33,3 +33,15 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+
+# End of Nest.js
+.env
+.config
+serviceAccountKey.json
+.env.prod
+.scannerwork/
+
+# Temporary folders
+tmp/
+temp/
