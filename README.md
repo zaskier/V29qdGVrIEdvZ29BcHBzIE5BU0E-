@@ -26,7 +26,7 @@
 
 # url-collector
 
-"microservice that prepares a list of urls for the first microservice media-downloader based on https://api.nasa.gov/planetary/apod
+microservice that prepares a list of urls for the first microservice media-downloader based on https://api.nasa.gov/planetary/apod
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
