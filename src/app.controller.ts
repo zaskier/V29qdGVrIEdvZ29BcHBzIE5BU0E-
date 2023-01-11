@@ -1,5 +1,4 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { AxiosResponse } from 'axios';
 import { AppService } from './app.service';
 
 @Controller()
@@ -10,7 +9,7 @@ export class AppController {
   getPictures(
     @Query('start_date') startDate: string,
     @Query('end_date') endDate: string,
-  ): Promise<any> {
+  ): Promise<object> {
     return this.appService.getPictures(startDate, endDate);
   }
 }

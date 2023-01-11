@@ -9,7 +9,7 @@ export class AppService {
     this.logger = new Logger();
   }
 
-  async getPictures(startDate, endDate): Promise<any> {
+  async getPictures(startDate, endDate): Promise<object> {
     this.logger.log(
       `Request started ${process.env.URL_NASA_APOD + process.env.API_KEY}`,
     );
@@ -30,7 +30,14 @@ export class AppService {
         },
       )
       .then((res) => {
-        return res.data;
+        const filteredMediaType = res.data
+          .filter(function (record) {
+            return record.media_type === 'image';
+          })
+          .map(function (media) {
+            return media.hdurl;
+          });
+        return { urls: filteredMediaType };
       });
   }
 }
