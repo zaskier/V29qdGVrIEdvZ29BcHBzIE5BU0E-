@@ -1,15 +1,41 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Logger,
+  ConflictException,
+} from '@nestjs/common';
 import { AppService } from './app.service';
+import { DateValidationPipe } from './utils/pipes/validation-date.pipe';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  logger: Logger;
+
+  constructor(private readonly appService: AppService) {
+    this.logger = new Logger();
+  }
 
   @Get('pictures')
   getPictures(
-    @Query('start_date') startDate: string,
-    @Query('end_date') endDate: string,
+    @Query('start_date', new DateValidationPipe()) startDate: string,
+    @Query('end_date', new DateValidationPipe()) endDate: string,
   ): Promise<object> {
-    return this.appService.getPictures(startDate, endDate);
+    return new Promise<object>((resolve, reject) => {
+      if (new Date(startDate).getTime() > new Date(endDate).getTime()) {
+        this.logger.error('end_date cannot happen before start_date ');
+        reject(new ConflictException('start date comes after end date'));
+      }
+
+      this.appService
+        .getPictures(startDate, endDate)
+        .then((pictures) => {
+          resolve(pictures);
+        })
+        .catch((error) => {
+          this.logger.error(error);
+          reject(new ConflictException({ message: error.message }));
+        });
+    });
   }
 }
