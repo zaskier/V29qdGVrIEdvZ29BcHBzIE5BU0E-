@@ -15,7 +15,9 @@ export class AppService {
     );
     this.logger.log(
       `${
-        process.env.URL_NASA_APOD + process.env.API_KEY
+        process.env.URL_NASA_APOD + process.env.API_KEY + process.env.API_KEY
+          ? process.env.API_KEY
+          : 'DEMO_KEY'
       }&start_date=${startDate}&end_date=${endDate}`,
     );
     return await axios
