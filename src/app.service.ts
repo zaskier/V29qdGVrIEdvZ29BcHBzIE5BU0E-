@@ -29,6 +29,7 @@ export class AppService {
           headers: {
             'Content-Type': 'application/json',
           },
+          timeout: 240000,
         },
       )
       .then((res) => {
