@@ -30,6 +30,23 @@ microservice that prepares a list of urls for the first microservice media-downl
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+### example input
+
+```
+GET {{url}}/pictures?start_date=2020-01-04&end_date=2020-02-05
+```
+
+### example output
+
+```
+{“urls”: ["https://apod.nasa.gov/apod/image/2008/AlienThrone_Zajac_3807.jpg", ...]}
+```
+
+- timeout of api is 240s because requests with bigger date range can be generated for long time.
+- Recomended amount of pictures gathered through one request is for 1 month. Api can throw errors for longer time range.
+- added api key allows 1000 requests per hour to allow trafic per whole hour there is set limit through throttler for 5 requests per 18 seconds.
+- tests covers exceptions and api keys correctness.
+
 ## Installation
 
 ```bash
@@ -54,12 +71,16 @@ $ npm run start:prod
 ```bash
 # unit tests
 $ npm run test
+```
 
-# e2e tests
-$ npm run test:e2e
+## Run App with Docker
 
-# test coverage
-$ npm run test:cov
+### first create .env file in main directory based on .env.development
+
+```bash
+# example run
+$ docker build .\V29qdGVrIEdvZ29BcHBzIE5BU0E- -t wis/url-collector
+$ docker run -p 3000:8080 wis/url-collector
 ```
 
 ## Support
